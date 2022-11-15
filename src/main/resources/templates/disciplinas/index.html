@@ -1,0 +1,100 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"  >
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Lista de Disciplinas</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--<a class="navbar-brand" href="#">Navbar</a>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home <span class="sr-only"></span></a>
+            <a class="nav-item nav-link" href="#">Alunos</a>
+            <a class="nav-item nav-link" href="/professores">Professores</a>
+            <a class="nav-item nav-link" href="#">Aulas</a>
+            <a class="nav-item nav-link" href="/disciplinas">Disciplinas</a>
+
+        </div>
+    </div>
+</nav>
+
+    <div class="container">
+        <div class="row">
+            <h1>Lista de Disciplinas</h1>
+        </div>
+        <div class="row">
+        <a class="btn btn-primary" href="/disciplina/new" role="button">Criar Nova Disciplina</a>
+        </div>
+        <br/><br/>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Área</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="disciplina : ${disciplinas}">
+                        <th class="col-1" scope="row" th:text="${disciplina.getId()}">ID da Disciplina</th>
+                        <td class="col-4" th:text="${disciplina.titulo}">Título</td>
+                        <td class="col-4" th:text="${disciplina.area}">Área</td>
+                        <td>
+                            <a href='#' th:href="@{'/edit/' + ${disciplina.id}}">Edit</a>
+
+                            <a href='#' th:href="@{'/delete/' + ${disciplina.id}}">Delete</a>
+                        </td>
+                    </tr>
+                <!--    <tr>
+                        <th scope="row">2</th>
+                        <td>ingles</td>
+                        <td>Letras</td>
+                        <td>
+                            <a href='#' th:href="@{'/edit/' + ${disciplina.id} + '/edit'}">Edit</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href='#' th:href="@{'/delete/' + ${disciplina.id} + '/delete'}">Delete</a>
+                        </td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+<div align="center">
+    <h1>Lista de Disciplinas</h1>
+    <a href="/new">Criar Nova Disciplina</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Area</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="disciplina : ${disciplinas}">
+            <td th:text="${disciplina.titulo}">titulo</td>
+            <td th:text="${disciplina.area}">area</td>
+            <td>
+                <a href='#' th:href="@{'/edit/' + ${disciplina.id} + '/edit'}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href='#' th:href="@{'/delete/' + ${disciplina.id} + '/delete'}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

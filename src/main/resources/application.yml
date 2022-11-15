@@ -1,0 +1,14 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: app-escola
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/escola
+    username: root
+    password: app_employees
+  jpa:
+    hibernate.ddl-auto: none
+    generate-ddl: false
+    show-sql: false
