@@ -40,3 +40,9 @@ aluno_matricula CHAR(8),
 FOREIGN KEY(professor_nif) REFERENCES PROFESSOR (nif),
 FOREIGN KEY(aluno_matricula) REFERENCES ALUNO (matricula)
 );
+
+CREATE TABLE USER (
+id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+username Varchar(10) NOT NULL,
+password Varchar(20) NOT NULL
+);

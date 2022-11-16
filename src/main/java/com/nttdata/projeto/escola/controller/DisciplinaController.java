@@ -27,12 +27,6 @@ public class DisciplinaController {
     @GetMapping("/disciplinas")
     public ModelAndView viewHomePage2() {
         List<DisciplinaEntity> disciplinas = disciplinaService.listAll();
-        //model.addAttribute("listDisciplinas", listDisciplinas);
-        /*DisciplinaEntity disciplina1 = new DisciplinaEntity("POO", "Tecnologia");
-        disciplina1.setId(1);
-        DisciplinaEntity disciplina2 = new DisciplinaEntity("PDS", "Tecnologia");
-        disciplina2.setId(2);
-        List<DisciplinaEntity> disciplinas = Arrays.asList(disciplina1,disciplina2);*/
         ModelAndView mv = new ModelAndView("disciplinas/index"); //nome do arquivo html que vai ser renderizado/exibido
         mv.addObject("disciplinas", disciplinas);
         return mv;
@@ -47,7 +41,7 @@ public class DisciplinaController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveDisciplina(@ModelAttribute("disciplina") DisciplinaEntity disciplina) {
+    public String saveDisciplina(@ModelAttribute("disciplina") DisciplinaEntity disciplina) throws Exception {
 
         disciplinaService.save(disciplina);
 
@@ -71,7 +65,7 @@ public class DisciplinaController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable(name = "id") int id) {
+    public String deleteDisciplina(@PathVariable(name = "id") int id) {
         disciplinaService.delete(id);
         return "redirect:/disciplinas";
     }

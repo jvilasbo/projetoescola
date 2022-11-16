@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Lista de Professores</title>
+    <title>Lista de Aulas</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -27,10 +27,10 @@
 
 <div class="container">
     <div class="row">
-        <h1>Lista de Professores</h1>
+        <h1>Lista de Aulas</h1>
     </div>
     <div class="row">
-        <a class="btn btn-primary" href="/professor/newProfessor" role="button">Criar Novo Professor</a>
+        <a class="btn btn-primary" href="/aula/newAula" role="button">Adicionar Aula</a>
     </div>
     <br/><br/>
     <div class="row">
@@ -38,31 +38,29 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">NIF</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Idade</th>
-                    <th scope="col">Género</th>
-                    <th scope="col">Tempo de Ensino</th>
-                    <th scope="col">Salário</th>
-                    <th scope="col">Disciplina</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Data da Aula</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Professor</th>
+                    <th scope="col">Aluno</th>
                     <th scope="col">Handle</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="professor : ${professores}">
-                    <th class="col-2" scope="row" th:text="${professor.getNif()}">NIF</th>
-                    <td class="col-4" th:text="${professor.nome}">Nome</td>
-                    <td class="col-2" th:text="${professor.idade}">Idade</td>
-                    <th class="col-2" scope="row" th:text="${professor.genero}">Género</th>
-                    <td class="col-4" th:text="${professor.tempoEnsino}">Tempo de Ensino</td>
-                    <td class="col-4" th:text="${professor.salario}">Salário</td>
-                    <td class="col-4" th:text="${professor.disciplina.getTitulo()}">Disciplina</td>
+                <tr th:each="aula : ${aulas}">
+                    <th class="col-2" scope="row" th:text="${aula.getId()}">ID</th>
+                    <td class="col-2" th:text="${aula.dataAula}">Data da Aula</td>
+                    <td class="col-2" th:text="${aula.duracao}">Duração</td>
+                    <th class="col-2" scope="row" th:text="${aula.valor}">Valor</th>
+                    <td class="col-4" th:text="${aula.professor.getNome()}">Professor</td>
+                    <td class="col-4" th:text="${aula.aluno.getNome()}">Aluno</td>
                     <td class="col-4">
-                        <a href='#' th:href="@{'/editProfessor/' + ${professor.nif}}">Edit</a>
+                        <a href='#' th:href="@{'/editAula/' + ${aula.id}}">Edit</a>
                     </td>
                     <td class="col-4">
-                        <a href='#' th:href="@{'/deleteProfessor/' + ${professor.nif}}">Delete</a>
+                        <a href='#' th:href="@{'/deleteAula/' + ${aula.id}}">Delete</a>
                     </td>
                 </tr>
                 </tbody>

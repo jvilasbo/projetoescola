@@ -1,0 +1,72 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"  >
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Lista de Alunos</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--<a class="navbar-brand" href="#">Navbar</a>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/home">Home <span class="sr-only"></span></a>
+            <a class="nav-item nav-link" href="/alunos">Alunos</a>
+            <a class="nav-item nav-link" href="/professores">Professores</a>
+            <a class="nav-item nav-link" href="/aulas">Aulas</a>
+            <a class="nav-item nav-link" href="/disciplinas">Disciplinas</a>
+
+        </div>
+    </div>
+</nav>
+
+    <div class="container">
+        <div class="row">
+            <h1>Lista de Alunos</h1>
+        </div>
+        <div class="row">
+        <a class="btn btn-primary" href="/aluno/newAluno" role="button">Criar Novo Aluno</a>
+        </div>
+        <br/><br/>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nº de Matrícula</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Idade</th>
+                        <th scope="col">Género</th>
+                        <th scope="col">NIF</th>
+                        <th scope="col">Ano de Escolaridade</th>
+                        <th scope="col">Handle</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="aluno : ${alunos}">
+                        <th class="col-2" scope="row" th:text="${aluno.getMatricula()}">Nº de Matrícula</th>
+                        <td class="col-4" th:text="${aluno.nome}">Nome</td>
+                        <td class="col-2" th:text="${aluno.idade}">Idade</td>
+                        <th class="col-2" scope="row" th:text="${aluno.genero}">Género</th>
+                        <td class="col-4" th:text="${aluno.nif}">NIF</td>
+                        <td class="col-4" th:text="${aluno.escolaridade}">Ano de Escolaridade</td>
+                        <td class="col-4">
+                            <a href='#' th:href="@{'/editAluno/' + ${aluno.matricula}}">Edit</a>
+                        </td>
+                        <td class="col-4">
+                            <a href='#' th:href="@{'/deleteAluno/' + ${aluno.matricula}}">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

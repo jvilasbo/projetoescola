@@ -1,6 +1,5 @@
 package com.nttdata.projeto.escola.model;
 
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

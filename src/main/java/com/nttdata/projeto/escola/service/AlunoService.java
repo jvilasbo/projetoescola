@@ -1,9 +1,7 @@
 package com.nttdata.projeto.escola.service;
 
 import com.nttdata.projeto.escola.model.AlunoEntity;
-import com.nttdata.projeto.escola.model.DisciplinaEntity;
 import com.nttdata.projeto.escola.repository.IAlunoRepository;
-import com.nttdata.projeto.escola.repository.IDisciplinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

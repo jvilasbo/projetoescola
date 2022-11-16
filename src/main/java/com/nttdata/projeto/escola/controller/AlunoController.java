@@ -1,9 +1,9 @@
 package com.nttdata.projeto.escola.controller;
 
+import com.nttdata.projeto.escola.dto.EscolaridadeRestDto;
 import com.nttdata.projeto.escola.model.AlunoEntity;
-import com.nttdata.projeto.escola.model.DisciplinaEntity;
+import com.nttdata.projeto.escola.repository.rest.MinisterioRestRepository;
 import com.nttdata.projeto.escola.service.AlunoService;
-import com.nttdata.projeto.escola.service.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +18,11 @@ public class AlunoController {
     @Autowired
     private AlunoService alunoService;
 
+    @Autowired
+    private MinisterioRestRepository minRep;
+
     @GetMapping("/alunos-model")
-    public String viewHomePage(Model model) {
+    public String viewAlunosHomePage(Model model) {
         List<AlunoEntity> alunos = alunoService.listAll();
         model.addAttribute("alunos", alunos);
 
@@ -27,7 +30,7 @@ public class AlunoController {
     }
 
     @GetMapping("/alunos")
-    public ModelAndView viewHomePage2() {
+    public ModelAndView viewAlunosHomePage2() {
         List<AlunoEntity> alunos = alunoService.listAll();
         //model.addAttribute("listDisciplinas", listDisciplinas);
         /*DisciplinaEntity disciplina1 = new DisciplinaEntity("POO", "Tecnologia");
@@ -40,7 +43,7 @@ public class AlunoController {
         return mv;
     }
 
-    @GetMapping("/aluno/new")
+    @GetMapping("/aluno/newAluno")
     public String showNewAlunoPage(Model model) {
         AlunoEntity aluno = new AlunoEntity();
         model.addAttribute("aluno", aluno);
@@ -48,12 +51,28 @@ public class AlunoController {
         return "alunos/new_aluno";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    //save working without validation of escolaridade
+ /*   @RequestMapping(value = "/saveAluno", method = RequestMethod.POST)
     public String saveAluno(@ModelAttribute("aluno") AlunoEntity aluno) {
 
         alunoService.save(aluno);
 
         return "redirect:/alunos";
+    }*/
+
+    //save with validation
+    @RequestMapping(value = "/saveAluno", method = RequestMethod.POST)
+    public String saveAluno(@ModelAttribute("aluno") AlunoEntity aluno, Model m) {
+        int idade = aluno.getIdade();
+        String ano = aluno.getEscolaridade();
+        //EscolaridadeRestDto verifiedEscolaridade = minRep.findByIdade(idade);
+        EscolaridadeRestDto verifiedEscolaridade = new EscolaridadeRestDto(6, "1º Ano");
+        if(ano.equals(verifiedEscolaridade.getAnoEscolar())){
+            alunoService.save(aluno);
+            return "redirect:/alunos";
+        }
+        m.addAttribute("error", "Username & Password Incorrectos");
+        return "alunos/new_aluno";
     }
 
     /*@PostMapping(value = "/save")
@@ -63,7 +82,7 @@ public class AlunoController {
         return "redirect:/disciplinas";
     }*/
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/editAluno/{id}")
     public ModelAndView showEditAlunoPage(@PathVariable(name = "id") String id) {
         ModelAndView mv = new ModelAndView("alunos/edit_aluno");
         AlunoEntity aluno = alunoService.get(id);
@@ -72,8 +91,8 @@ public class AlunoController {
         return mv;
     }
 
-    @RequestMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable(name = "id") String id) {
+    @RequestMapping("/deleteAluno/{id}")
+    public String deleteAluno(@PathVariable(name = "id") String id) {
         alunoService.delete(id);
         return "redirect:/alunos";
     }

@@ -27,4 +27,6 @@ public class DisciplinaEntity {
         this.titulo = titulo;
         this.area = area;
     }
+
+
 }
