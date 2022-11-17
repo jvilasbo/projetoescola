@@ -1,7 +1,11 @@
 package com.nttdata.projeto.escola.controller;
 
+import com.nttdata.projeto.escola.model.AlunoEntity;
 import com.nttdata.projeto.escola.model.AulaEntity;
+import com.nttdata.projeto.escola.model.ProfessorEntity;
+import com.nttdata.projeto.escola.service.AlunoService;
 import com.nttdata.projeto.escola.service.AulaService;
+import com.nttdata.projeto.escola.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,10 @@ public class AulaController {
 
     @Autowired
     private AulaService aulaService;
+    @Autowired
+    private ProfessorService professorService;
+    @Autowired
+    private AlunoService alunoService;
 
     @GetMapping("/aulas-model")
     public String viewAulasHomePage(Model model) {
@@ -37,6 +45,12 @@ public class AulaController {
         AulaEntity aula = new AulaEntity();
         model.addAttribute("aula", aula);
 
+        List<ProfessorEntity> professores = professorService.listAll();
+        model.addAttribute("professores", professores);
+
+        List<AlunoEntity> alunos = alunoService.listAll();
+        model.addAttribute("alunos", alunos);
+
         return "aulas/new_aula";
     }
 
@@ -56,15 +70,21 @@ public class AulaController {
     @RequestMapping("/editAula/{id}")
     public ModelAndView showEditAulaPage(@PathVariable(name = "id") int id) {
         ModelAndView mv = new ModelAndView("aulas/edit_aula");
-        AulaEntity aula = aulaService.get(id);
+        AulaEntity aula = aulaService.getAula(id);
         mv.addObject("aula", aula);
+
+        List<ProfessorEntity> professores = professorService.listAll();
+        mv.addObject("professores", professores);
+
+        List<AlunoEntity> alunos = alunoService.listAll();
+        mv.addObject("alunos", alunos);
 
         return mv;
     }
 
     @RequestMapping("/deleteAula/{id}")
     public String deleteAula(@PathVariable(name = "id") int id) {
-        aulaService.delete(id);
+        aulaService.deleteById(id);
         return "redirect:/aulas";
     }
 }

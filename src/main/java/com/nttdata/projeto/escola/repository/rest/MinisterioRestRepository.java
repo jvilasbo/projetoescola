@@ -1,6 +1,7 @@
 package com.nttdata.projeto.escola.repository.rest;
 
 import com.nttdata.projeto.escola.dto.DisciplinaRestDto;
+import com.nttdata.projeto.escola.dto.EscolaridadeRestDto;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -50,8 +51,6 @@ public class MinisterioRestRepository {
     }*/
 
     public Optional<List<DisciplinaRestDto>> findAllDisciplinas () {
-
-
         List<DisciplinaRestDto> listDisciplinas;
         try {
             listDisciplinas = webClient.get()
@@ -75,8 +74,56 @@ public class MinisterioRestRepository {
         }else return Optional.empty();
     }
 
+    public List<String> findAllDistinctArea () {
+        List<String> listDistinctAreas;
+        try {
+            listDistinctAreas = webClient.get()
+                    .uri("/disciplinas/areas")
+                    .retrieve()
+                    .onStatus(HttpStatus::is4xxClientError, error -> {
+                        return Mono.empty();
+                    })
+                    .bodyToMono(new ParameterizedTypeReference<List<String>>() {
+                    })
+                    .onErrorReturn(new ArrayList<>())
+                    .doOnError(throwable -> {
+                        System.out.println(throwable.getMessage());
+                    }).block();
 
-   /* public Optional<DisciplinaRestDto> findDisciplina(int id) {
+        }catch( Exception e) {
+            listDistinctAreas = null;
+        }
+        if(listDistinctAreas!=null){
+            return listDistinctAreas;
+        }else return null;
+    }
+
+    public Optional<List<EscolaridadeRestDto>> findAllEscolaridades () {
+        List<EscolaridadeRestDto> listEscolaridades;
+        try {
+            listEscolaridades = webClient.get()
+                    .uri("/escolaridades")
+                    .retrieve()
+                    .onStatus(HttpStatus::is4xxClientError, error -> {
+                        return Mono.empty();
+                    })
+                    .bodyToMono(new ParameterizedTypeReference<List<EscolaridadeRestDto>>() {
+                    })
+                    .onErrorReturn(new ArrayList<>())
+                    .doOnError(throwable -> {
+                        System.out.println(throwable.getMessage());
+                    }).block();
+
+        }catch( Exception e) {
+            listEscolaridades = null;
+        }
+        if(listEscolaridades!=null){
+            return Optional.of(listEscolaridades);
+        }else return Optional.empty();
+    }
+
+
+    public Optional<EscolaridadeRestDto> findEscolaridadeByIdade (int idade) {
 
         WebClient webClient = WebClient.builder()
                 .baseUrl("http://localhost:8088")
@@ -85,32 +132,47 @@ public class MinisterioRestRepository {
                 .clientConnector( new ReactorClientHttpConnector( HttpClient.create(ConnectionProvider.newConnection())) )
                 .build();
 
-        DisciplinaRestDto disciplinaRestDTO;
+        EscolaridadeRestDto escolaridadeRestDto;
         try {
-            disciplinaRestDTO = webClient
+            escolaridadeRestDto = webClient
                     .get()
-                    .uri("/disciplinas/" + id)
+                    .uri("/escolaridades/" + idade)
                     .retrieve()
-
                     .onStatus(HttpStatus::is4xxClientError, error -> { return Mono.empty(); })
-
-                    .bodyToMono(DisciplinaRestDto.class)
-
-                    .onErrorReturn( new DisciplinaRestDto("t", "f") )
-
-                    .doOnError(throwable -> { System.out.println( throwable.getMessage() );} )
+                    .bodyToMono(EscolaridadeRestDto.class)
                     .block();
         }
         catch( Exception e) {
 
-            disciplinaRestDTO = null;
+            escolaridadeRestDto = null;
         }
 
-        if( disciplinaRestDTO != null )
-            return Optional.of(disciplinaRestDTO);
+        if( escolaridadeRestDto != null )
+            return Optional.of(escolaridadeRestDto);
         else
             return Optional.empty();
-    }*/
+    }
+
+    public Optional<DisciplinaRestDto> findDisciplinaByTitulo (String titulo) {
+
+        DisciplinaRestDto disciplinaRestDto;
+        try {
+            disciplinaRestDto = webClient
+                    .get()
+                    .uri("/disciplinas/" + titulo)
+                    .retrieve()
+                    .onStatus(HttpStatus::is4xxClientError, error -> { return Mono.empty(); })
+                    .bodyToMono(DisciplinaRestDto.class)
+                    .block();
+        }
+        catch( Exception e) {
+            disciplinaRestDto = null;
+        }
+        if( disciplinaRestDto != null )
+            return Optional.of(disciplinaRestDto);
+        else
+            return Optional.empty();
+    }
 }
 
 

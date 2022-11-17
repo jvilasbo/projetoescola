@@ -23,7 +23,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Data da Aula</label>
-                    <input class="form-control" type="text"  th:field="*{dataAula}">
+                    <input class="form-control" type="date"  th:field="*{dataAula}">
                     <div></div>
                 </div>
                 <div class="mb-3">
@@ -38,16 +38,30 @@
                 </div>
                 <div class="mb-3">
                 <label class="form-label">Professor</label>
-                <input class="form-control" type="text"  th:field="*{professor}">
+               <!-- <input class="form-control" type="text"  th:field="*{professor}">-->
+                    <select class="form-control selectpicker" th:field="*{professor}" id="professor" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:each="professor : ${professores}"
+                                th:value="${professor.getNif()}"
+                                th:text="${professor.getNome()}">Nome do Professor
+                        </option>
+                    </select>
                 <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Aluno</label>
-                    <input class="form-control" type="text"  th:field="*{aluno}">
+                    <!--<input class="form-control" type="text"  th:field="*{aluno}">-->
+                    <select class="form-control selectpicker" th:field="*{aluno}" id="aluno" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:each="aluno : ${alunos}"
+                                th:value="${aluno.getMatricula()}"
+                                th:text="${aluno.getNome()}">Nome do Aluno
+                        </option>
+                    </select>
                     <div></div>
                 </div>
                 <button class="btn btn-primary" type="submit">Submeter</button>
-                <a class="btn btn-outline-primary" href="javascript:history.back()">Voltar</a>
+                <a class="btn btn-outline-primary" href="/aulas">Voltar</a>
             </form>
         </div>
     </div>

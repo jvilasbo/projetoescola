@@ -15,7 +15,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <form action="#" th:action="@{/saveAluno}" th:object="${aluno}" method="post">
+            <form action="#" th:action="@{/saveAfterEditAluno}" th:object="${aluno}" method="post">
                 <div class="mb-3">
                     <label class="form-label">Nº de Matrícula</label>
                     <input class="form-control" type="text"  th:field="*{matricula}" readonly="readonly">
@@ -23,17 +23,22 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
-                    <input class="form-control" type="text"  th:field="*{nome}">
+                    <input class="form-control" type="text"  th:field="*{nome}" required>
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Idade</label>
-                    <input class="form-control" type="text"  th:field="*{idade}">
+                    <input class="form-control" type="number" min="5"  th:field="*{idade}" required>
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Género</label>
-                    <input class="form-control" type="text"  th:field="*{genero}">
+                    <!--<input class="form-control" type="text"  th:field="*{genero}">-->
+                    <select class="form-control selectpicker" th:field="*{genero}" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:value="'M'" th:text="Masculino">Masculino</option>
+                        <option th:value="'F'" th:text="Feminino">Feminino</option>
+                    </select>
                     <div></div>
                 </div>
                 <div class="mb-3">
@@ -43,11 +48,22 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ano de Escolaridade</label>
-                    <input class="form-control" type="text"  th:field="*{escolaridade}">
+                    <!--<input class="form-control" type="text"  th:field="*{escolaridade}">-->
+                    <select class="form-control selectpicker" th:field="*{escolaridade}" id="escolaridade" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:each="escolaridade : ${escolaridades}"
+                                th:value="${escolaridade.getAnoEscolar()}"
+                                th:text="${escolaridade.getAnoEscolar()}">Ano Escolaridade
+                        </option>
+                    </select>
                     <div></div>
                 </div>
+                <div class="row">
+                    <p th:if="${error}" class="error">Não é possível inscrever o aluno neste ano de escolaridade!</p>
+                </div>
+                <br>
                 <button class="btn btn-primary" type="submit">Submeter</button>
-                <a class="btn btn-outline-primary" href="javascript:history.back()">Voltar</a>
+                <a class="btn btn-outline-primary" href="/alunos">Voltar</a>
             </form>
         </div>
     </div>

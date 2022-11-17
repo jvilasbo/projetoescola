@@ -11,7 +11,7 @@ public class UserService {
     @Autowired
     private IUserRepository userRepository;
 
-    public UserEntity get(String username) {
+    public UserEntity getUser(String username) {
         return userRepository.getReferenceByUsername(username);
     }
 }

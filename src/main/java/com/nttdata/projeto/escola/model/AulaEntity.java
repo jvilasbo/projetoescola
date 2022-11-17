@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Getter
@@ -23,7 +24,7 @@ public class AulaEntity {
     private int id;
 
     @Column(name="data_aula")
-    private LocalDate dataAula;
+    private Date dataAula;
 
     private BigDecimal duracao;
 
@@ -41,7 +42,7 @@ public class AulaEntity {
     /*private BigDecimal media;
     private String resultado;*/
 
-    public AulaEntity(LocalDate dataAula, BigDecimal duracao, BigDecimal valor, ProfessorEntity professor, AlunoEntity aluno) {
+    public AulaEntity(Date dataAula, BigDecimal duracao, BigDecimal valor, ProfessorEntity professor, AlunoEntity aluno) {
         this.dataAula = dataAula;
         this.duracao = duracao;
         this.valor = valor;

@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="container">
+    <br>
     <div class="row">
         <h1>Nova Disciplina</h1>
     </div>
@@ -18,16 +19,36 @@
             <form action="#" th:action="@{/save}" th:object="${disciplina}" method="post">
                 <div class="mb-3">
                     <label class="form-label">Título</label>
-                    <input class="form-control" type="text"  th:field="*{titulo}">
+                    <select class="form-control selectpicker" th:field="*{titulo}" id="titulo" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:each="disciplina : ${disciplinasMinisterio}"
+                                th:value="${disciplina.getTitulo()}"
+                                th:text="${disciplina.getTitulo()}">Título
+                        </option>
+                    </select>
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Área</label>
-                    <input class="form-control" type="text"  th:field="*{area}">
+                    <select class="form-control selectpicker" th:field="*{area}" id="area" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:each="area : ${areasMinisterio}"
+                                th:value="${area}"
+                                th:text="${area}">Área
+                        </option>
+                    </select>
                     <div></div>
                 </div>
+                <div class="row">
+                    <p th:if="${error1}" class="error1" style="color: red">A disciplina já existe!</p>
+                </div>
+                <div class="row">
+                    <p th:if="${error2}" class="error2" style="color: red">A área não corresponde à disciplina seleccionada!</p>
+                </div>
+                <br>
                 <button class="btn btn-primary" type="submit">Submeter</button>
-                <a class="btn btn-outline-primary" href="javascript:history.back()">Voltar</a>
+                <button class="btn btn-primary" type="reset">Limpar</button>
+                <a class="btn btn-outline-primary" href="/disciplinas">Voltar</a>
             </form>
         </div>
     </div>

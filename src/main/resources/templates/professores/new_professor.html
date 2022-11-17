@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="container">
+    <br>
     <div class="row">
         <h1>Novo Professor</h1>
     </div>
@@ -18,42 +19,54 @@
             <form action="#" th:action="@{/saveProfessor}" th:object="${professor}" method="post">
                 <div class="mb-3">
                     <label class="form-label">NIF</label>
-                    <input class="form-control" type="text"  th:field="*{nif}">
+                    <input class="form-control" type="text" th:field="*{nif}" required>
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
-                    <input class="form-control" type="text"  th:field="*{nome}">
+                    <input class="form-control" type="text" th:field="*{nome}" required>
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Idade</label>
-                    <input class="form-control" type="text"  th:field="*{idade}">
+                    <input class="form-control" type="number" min="18" th:field="*{idade}">
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Género</label>
-                    <input class="form-control" type="text"  th:field="*{genero}">
+                    <!--<input class="form-control" type="text"  th:field="*{genero}">-->
+                    <select class="form-control selectpicker" th:field="*{genero}">
+                        <option value="">Escolha uma opção</option>
+                        <option th:value="'M'" th:text="Masculino">Masculino</option>
+                        <option th:value="'F'" th:text="Feminino">Feminino</option>
+                    </select>
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Tempo de Ensino</label>
-                    <input class="form-control" type="text"  th:field="*{tempoEnsino}">
+                    <input class="form-control" type="text" th:field="*{tempoEnsino}">
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Salário</label>
-                    <input class="form-control" type="text"  th:field="*{salario}">
+                    <input class="form-control" type="text" th:field="*{salario}">
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Disciplina</label>
-                    <input class="form-control" type="text"  th:field="*{disciplina}">
+                    <!-- <input class="form-control" type="text"  th:field="*{disciplina}">-->
+                    <select class="form-control selectpicker" th:field="*{disciplina}" id="disciplina" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:each="disciplina : ${disciplinas}"
+                                th:value="${disciplina.getId()}"
+                                th:text="${disciplina.getTitulo()}">Título
+                        </option>
+                    </select>
                     <div></div>
                 </div>
                 <button class="btn btn-primary" type="submit">Submeter</button>
-                <button class="btn btn-primary" type="reset">Apagar</button>
-                <a class="btn btn-outline-primary" href="javascript:history.back()">Voltar</a>
+                <button class="btn btn-primary" type="reset">Limpar</button>
+                <a class="btn btn-outline-primary" href="/professores">Voltar</a>
             </form>
         </div>
     </div>

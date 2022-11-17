@@ -9,10 +9,12 @@
     <title>Login Page</title>
 </head>
 <body>
-<div class="container">
+<br>
+<div class="container"  style="width: 200px;">
     <h1>Login</h1>
 </div>
 <br>
+<div class="container" style="width: 500px;">
 <form action="#" th:action="@{/index}" th:object="${loginForm}" method="post">
 
     <div class="container">
@@ -27,15 +29,15 @@
                    placeholder="Password" required>
         </div>
 
-        <div class="row">
-            <p th:if="${error}" class="error">UserName ou Password Incorrectos</p>
+        <div >
+            <p th:if="${error}" class="error" style="color: red">UserName ou Password Incorrectos!</p>
         </div>
-        <div class="row button">
+        <div >
             <input class="btn btn-primary" type="submit" value="Login">
         </div>
         <!-- <a class="btn btn-primary" href="/home" role="button">Entrar</a>-->
     </div>
 </form>
-
+</div>
 </body>
 </html>

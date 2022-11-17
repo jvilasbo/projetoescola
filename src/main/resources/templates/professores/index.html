@@ -24,15 +24,23 @@
         </div>
     </div>
 </nav>
-
+<br>
 <div class="container">
     <div class="row">
         <h1>Lista de Professores</h1>
     </div>
+    <br/><br/>
     <div class="row">
         <a class="btn btn-primary" href="/professor/newProfessor" role="button">Criar Novo Professor</a>
     </div>
-    <br/><br/>
+    <br/>
+    <div class="row">
+        <p th:if="${error}" class="error" style="color:red">O professor não pode ser apagado!</p>
+    </div>
+    <div class="row">
+        <p th:if="${error4}" class="error4" style="color:lime">Professor apagado com sucesso!</p>
+    </div>
+    <br/>
     <div class="row">
         <div class="col-12">
             <table class="table table-hover">
@@ -45,24 +53,26 @@
                     <th scope="col">Tempo de Ensino</th>
                     <th scope="col">Salário</th>
                     <th scope="col">Disciplina</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Acções</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="professor : ${professores}">
                     <th class="col-2" scope="row" th:text="${professor.getNif()}">NIF</th>
-                    <td class="col-4" th:text="${professor.nome}">Nome</td>
-                    <td class="col-2" th:text="${professor.idade}">Idade</td>
-                    <th class="col-2" scope="row" th:text="${professor.genero}">Género</th>
-                    <td class="col-4" th:text="${professor.tempoEnsino}">Tempo de Ensino</td>
-                    <td class="col-4" th:text="${professor.salario}">Salário</td>
+                    <td class="col-2" th:text="${professor.nome}">Nome</td>
+                    <td class="col-1" th:text="${professor.idade}">Idade</td>
+                    <th class="col-1" scope="row" th:text="${professor.genero}">Género</th>
+                    <td class="col-3" th:text="${professor.tempoEnsino}">Tempo de Ensino</td>
+                    <td class="col-1" th:text="${professor.salario}">Salário</td>
                     <td class="col-4" th:text="${professor.disciplina.getTitulo()}">Disciplina</td>
-                    <td class="col-4">
+                    <td class="col-1">
                         <a href='#' th:href="@{'/editProfessor/' + ${professor.nif}}">Edit</a>
                     </td>
-                    <td class="col-4">
-                        <a href='#' th:href="@{'/deleteProfessor/' + ${professor.nif}}">Delete</a>
+                    <td class="col-1">
+                        <a href='#' th:href="@{'/deleteProfessor/' + ${professor.nif}}"
+                           th:data-confirm-delete="|Tem a certeza que pretende apagar o professor ${professor.nome}?|"
+                           onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Delete</a>
                     </td>
                 </tr>
                 </tbody>

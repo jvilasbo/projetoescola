@@ -18,7 +18,7 @@ public class AlunoService {
         alunoRepository.save(aluno);
     }
 
-    public AlunoEntity get(String id) {
+    public AlunoEntity getAluno(String id) {
         return alunoRepository.findById(id).get();
     }
 
@@ -30,14 +30,17 @@ public class AlunoService {
         }
         return aluno;
     }*/
-    
+
     public List<AlunoEntity> listAll() {
         return alunoRepository.findAll();
     }
 
-    public void delete(String id) {
-        alunoRepository.deleteById(id);
+    public boolean deleteById(String id) {
+        try {
+            alunoRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-    
-    
 }

@@ -24,7 +24,7 @@
         </div>
     </div>
 </nav>
-
+<br>
 <div class="container">
     <div class="row">
         <h1>Lista de Aulas</h1>
@@ -44,23 +44,29 @@
                     <th scope="col">Valor</th>
                     <th scope="col">Professor</th>
                     <th scope="col">Aluno</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Acções</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="aula : ${aulas}">
-                    <th class="col-2" scope="row" th:text="${aula.getId()}">ID</th>
+                    <th class="col-1" scope="row" th:text="${aula.getId()}">ID</th>
                     <td class="col-2" th:text="${aula.dataAula}">Data da Aula</td>
                     <td class="col-2" th:text="${aula.duracao}">Duração</td>
                     <th class="col-2" scope="row" th:text="${aula.valor}">Valor</th>
-                    <td class="col-4" th:text="${aula.professor.getNome()}">Professor</td>
-                    <td class="col-4" th:text="${aula.aluno.getNome()}">Aluno</td>
-                    <td class="col-4">
+                    <td class="col-2" th:text="${aula.professor.getNome()}">Professor</td>
+                    <td class="col-2" th:text="${aula.aluno.getNome()}">Aluno</td>
+                    <td class="col-1">
                         <a href='#' th:href="@{'/editAula/' + ${aula.id}}">Edit</a>
                     </td>
-                    <td class="col-4">
+                  <!--  <td class="col-1">
                         <a href='#' th:href="@{'/deleteAula/' + ${aula.id}}">Delete</a>
+                    </td>-->
+                    <td class="col-1">
+                        <a href='#' th:href="@{'/deleteAula/' + ${aula.id}}"
+                           th:data-confirm-delete="|Tem a certeza que pretende apagar a aula ${aula.id}?|"
+                           onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+                            Delete</a>
                     </td>
                 </tr>
                 </tbody>

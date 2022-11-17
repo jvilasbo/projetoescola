@@ -18,7 +18,7 @@ public class AulaService {
         aulaRepository.save(aula);
     }
 
-    public AulaEntity get(int id) {
+    public AulaEntity getAula(int id) {
         return aulaRepository.findById(id).get();
     }
 
@@ -35,9 +35,7 @@ public class AulaService {
         return aulaRepository.findAll();
     }
 
-    public void delete(int id) {
+    public void deleteById(int id) {
         aulaRepository.deleteById(id);
     }
-    
-    
 }

@@ -23,16 +23,30 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Título</label>
-                    <input class="form-control" type="text"  th:field="*{titulo}">
+                   <!-- <input class="form-control" type="text"  th:field="*{titulo}">-->
+                    <select class="form-control selectpicker" th:field="*{titulo}" id="titulo" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:each="disciplina : ${disciplinasMinisterio}"
+                                th:value="${disciplina.getTitulo()}"
+                                th:text="${disciplina.getTitulo()}">Título
+                        </option>
+                    </select>
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Área</label>
-                    <input class="form-control" type="text"  th:field="*{area}">
+                    <!--<input class="form-control" type="text"  th:field="*{area}">-->
+                    <select class="form-control selectpicker" th:field="*{area}" id="area" required>
+                        <option value="">Escolha uma opção</option>
+                        <option th:each="area : ${areasMinisterio}"
+                                th:value="${area}"
+                                th:text="${area}">Área
+                        </option>
+                    </select>
                     <div></div>
                 </div>
                 <button class="btn btn-primary" type="submit">Submeter</button>
-                <a class="btn btn-outline-primary" href="javascript:history.back()">Voltar</a>
+                <a class="btn btn-outline-primary" href="/disciplinas">Voltar</a>
             </form>
         </div>
     </div>

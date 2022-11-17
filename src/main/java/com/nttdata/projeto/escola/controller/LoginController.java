@@ -30,7 +30,7 @@ public class LoginController {
     public String loginPage(@ModelAttribute(name = "loginForm") UserEntity user, Model m) {
         String name = user.getUsername();
         String pass = user.getPassword();
-        UserEntity verifiedUser = userService.get(name);
+        UserEntity verifiedUser = userService.getUser(name);
         if (verifiedUser != null) {
             if (name.equals(verifiedUser.getUsername()) && pass.equals(verifiedUser.getPassword())) {
                 m.addAttribute("name", name);

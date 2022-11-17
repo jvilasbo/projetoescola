@@ -18,7 +18,7 @@ public class ProfessorService {
         professorRepository.save(professor);
     }
 
-    public ProfessorEntity get(String id) {
+    public ProfessorEntity getProfessor(String id) {
         return professorRepository.findById(id).get();
     }
 
@@ -30,14 +30,19 @@ public class ProfessorService {
         }
         return disciplina;
     }*/
-    
+
     public List<ProfessorEntity> listAll() {
         return professorRepository.findAll();
     }
 
-    public void delete(String id) {
-        professorRepository.deleteById(id);
+    public boolean deleteById(String id) {
+        try {
+            professorRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-    
-    
+
+
 }
