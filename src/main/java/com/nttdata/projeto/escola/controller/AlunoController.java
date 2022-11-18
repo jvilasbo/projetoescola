@@ -69,6 +69,9 @@ public class AlunoController {
         String[] array1 = ano.split("º ");
         int anoIntroduced = Integer.parseInt(array1[0]);
 
+       if(idade > 17){
+           idade = 17;
+       }
         EscolaridadeRestDto verifiedEscolaridade = ministerioService.findEscolaridadeByIdade(idade);
 
         String[] array = verifiedEscolaridade.getAnoEscolar().split("º ");
@@ -110,6 +113,9 @@ public class AlunoController {
         String[] array1 = ano.split("º ");
         int anoIntroduced = Integer.parseInt(array1[0]);
 
+        if(idade > 17){
+            idade = 17;
+        }
         EscolaridadeRestDto verifiedEscolaridade = ministerioService.findEscolaridadeByIdade(idade);
 
         String[] array = verifiedEscolaridade.getAnoEscolar().split("º ");

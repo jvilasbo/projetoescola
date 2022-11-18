@@ -1,6 +1,5 @@
 package com.nttdata.projeto.escola.controller;
 
-import com.nttdata.projeto.escola.model.DisciplinaEntity;
 import com.nttdata.projeto.escola.model.UserEntity;
 import com.nttdata.projeto.escola.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LoginController {
@@ -20,12 +18,10 @@ public class LoginController {
     public String showLoginPage(Model model) {
         return "login/index";
     }
-
     @GetMapping("/home")
     public String showHomePage(Model model) {
         return "login/home";
     }
-
     @RequestMapping("/index")
     public String loginPage(@ModelAttribute(name = "loginForm") UserEntity user, Model m) {
         String name = user.getUsername();
@@ -40,6 +36,5 @@ public class LoginController {
         }
         m.addAttribute("error", "Username & Password Incorrectos");
         return "login/index";
-
     }
 }

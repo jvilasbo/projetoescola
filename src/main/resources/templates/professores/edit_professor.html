@@ -28,7 +28,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Idade</label>
-                    <input class="form-control" type="number" min="18"  th:field="*{idade}">
+                    <input class="form-control" type="number" min="18" max="100"  th:field="*{idade}">
                     <div></div>
                 </div>
                 <div class="mb-3">
@@ -43,12 +43,12 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Tempo de Ensino</label>
-                    <input class="form-control" type="text"  th:field="*{tempoEnsino}">
+                    <input class="form-control" type="number" min="0"  th:field="*{tempoEnsino}">
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Salário</label>
-                    <input class="form-control" type="text"  th:field="*{salario}">
+                    <input class="form-control" type="number" min="0"  th:field="*{salario}">
                     <div></div>
                 </div>
                 <div class="mb-3">

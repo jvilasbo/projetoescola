@@ -12,17 +12,20 @@ class DisciplinaEntityTest {
 
     @Test
     void shouldSetCorrectAtributesToDisciplinaEntity() {
-      /*  DisciplinaEntity disciplinaTeste = new DisciplinaEntity();
+        DisciplinaEntity disciplinaTeste = new DisciplinaEntity();
 
         disciplinaTeste.setTitulo("TituloTeste");
         disciplinaTeste.setArea("AreaTeste");
 
-        assertEquals("111111111", professorTeste.getNif());
-        assertEquals("NomeTeste", professorTeste.getNome());
-        assertEquals(20, professorTeste.getIdade());
-        assertEquals("F", professorTeste.getGenero());
-        assertEquals(10, professorTeste.getTempoEnsino());
-        assertEquals(BigDecimal.valueOf(200.0), professorTeste.getSalario());
-        assertEquals(disciplinaDouble, professorTeste.getDisciplina());*/
+        assertEquals("TituloTeste", disciplinaTeste.getTitulo());
+        assertEquals("AreaTeste", disciplinaTeste.getArea());
+    }
+
+    @Test
+    void shouldCreateDisciplinaWithCorrectAttributes() {
+        DisciplinaEntity disciplinaTeste = new DisciplinaEntity("titulo", "area");
+
+        assertEquals("titulo", disciplinaTeste.getTitulo());
+        assertEquals("area", disciplinaTeste.getArea());
     }
 }

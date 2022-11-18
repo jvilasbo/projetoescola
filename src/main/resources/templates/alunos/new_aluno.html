@@ -19,7 +19,7 @@
             <form action="#" th:action="@{/saveAluno}" th:object="${aluno}" method="post">
                 <div class="mb-3">
                     <label class="form-label">Nº de Matrícula</label>
-                    <input class="form-control" type="text"  th:field="*{matricula}" required>
+                    <input class="form-control" type="text" maxlength="8" th:field="*{matricula}" required>
                     <div></div>
                 </div>
                 <div class="mb-3">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Idade</label>
-                    <input class="form-control" type="number" min="5"  th:field="*{idade}" required>
+                    <input class="form-control" type="number" min="5" max="60" th:field="*{idade}" required>
                     <div></div>
                 </div>
                 <div class="mb-3">
@@ -43,7 +43,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">NIF</label>
-                    <input class="form-control" type="text"  th:field="*{nif}" required>
+                    <input class="form-control" type="text" maxlength="9" minlength="9" th:field="*{nif}" required>
                     <div></div>
                 </div>
                 <div class="mb-3">
