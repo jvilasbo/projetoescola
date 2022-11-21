@@ -39,19 +39,6 @@ public class DisciplinaService {
         }
     }
 
-  /*  public void save(DisciplinaEntity disciplina) throws Exception {
-        Optional<List<DisciplinaRestDto>> listOptional = ministerioWebRepository.findAllDisciplinas();
-
-        if(listOptional.isPresent()){
-            for(DisciplinaRestDto d : listOptional.get()){
-                if(d.getTitulo().equals(disciplina.getTitulo())){
-                    disciplinaRepository.save(disciplina);
-                    break;
-                }
-            }
-        }
-    }*/
-
     public DisciplinaEntity getDisciplina(int id) {
         return disciplinaRepository.findById(id).get();
     }

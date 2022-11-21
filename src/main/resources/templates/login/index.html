@@ -8,36 +8,47 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Login Page</title>
 </head>
-<body>
+<body><!--style="background-color:lightGrey;"-->
 <br>
-<div class="container"  style="width: 200px;">
+<div class="container" style="width: 200px;">
     <h1>Login</h1>
 </div>
 <br>
-<div class="container" style="width: 500px;">
-<form action="#" th:action="@{/index}" th:object="${loginForm}" method="post">
+<div class="container" style="width: 500px; border:2px solid Grey; padding: 20px; backgroung-color: white">
 
-    <div class="container">
-        <div class="form-group">
-            <label>Username</label>
-            <input class="form-control" type="text" name="username"
-                   placeholder="Enter Username" required>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input class="form-control" type="password" name="password"
-                   placeholder="Password" required>
-        </div>
 
-        <div >
-            <p th:if="${error}" class="error" style="color: red">UserName ou Password Incorrectos!</p>
+    <form class="form-inline" action="#" th:action="@{/index}" th:object="${loginForm}" method="post">
+
+        <div class="container" align="center">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                    <input class="form-control mx-sm-3" type="text" name="username"
+                           placeholder="Username" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Password </label>
+                <div class="col-sm-10">
+                    <input class="form-control mx-sm-3" type="password" name="password"
+                           placeholder="Password" required>
+                </div>
+            </div>
+
+            <div>
+                <p th:if="${error}" class="error" style="color: red">Username ou Password Incorrectos!</p>
+            </div>
+            <br>
+            <div class="dropdown-divider"></div>
+            <br>
+
+            <div align="center">
+                <input class="btn btn-primary" type="submit" value="Entrar">
+            </div>
+            <!-- <a class="btn btn-primary" href="/home" role="button">Entrar</a>-->
         </div>
-        <div >
-            <input class="btn btn-primary" type="submit" value="Login">
-        </div>
-        <!-- <a class="btn btn-primary" href="/home" role="button">Entrar</a>-->
-    </div>
-</form>
+    </form>
 </div>
 </body>
 </html>

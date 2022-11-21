@@ -5,6 +5,7 @@ import com.nttdata.projeto.escola.model.AulaEntity;
 import com.nttdata.projeto.escola.repository.IAlunoRepository;
 import com.nttdata.projeto.escola.repository.IAulaRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
@@ -78,14 +79,30 @@ class AulaServiceTest {
     }
 
     @Test
-    void shouldDeleteAlunoByIdAndCallRepositoryMethodOneTimeAndReturnTrue() {
+    void shouldDeleteAulaByIdAndCallRepositoryMethodOneTimeAndReturnTrue() {
         //Arrange
         int generatedId = new Random().nextInt();
 
         //Act
-        aulaService.deleteById(generatedId);
+        boolean result = aulaService.deleteById(generatedId);
 
         //Assert
         verify(aulaRepository, times(1)).deleteById(generatedId);
+        assertTrue(result);
+    }
+
+    @Test
+    void shouldDeleteAulaByIdAndCallRepositoryMethodOneTimeAndReturnFalseIfException() {
+        //Arrange
+        int generatedId = new Random().nextInt();
+
+        doThrow(new RuntimeException()).when(aulaRepository).deleteById(generatedId);
+
+        //Act
+        boolean result = aulaService.deleteById(generatedId);
+
+        //Assert
+        verify(aulaRepository, times(1)).deleteById(generatedId);
+        assertFalse(result);
     }
 }

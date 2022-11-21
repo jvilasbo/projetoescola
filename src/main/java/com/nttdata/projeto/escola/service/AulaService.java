@@ -35,7 +35,12 @@ public class AulaService {
         return aulaRepository.findAll();
     }
 
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
+        try {
         aulaRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

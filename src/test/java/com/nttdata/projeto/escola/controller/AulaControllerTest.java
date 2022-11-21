@@ -115,13 +115,36 @@ class AulaControllerTest {
     }
 
     @Test
-    void deleteAula() {
+    void shouldReturnSuccessMessageWhenDeleteAulaByIdIsTrue() {
         //Arrange
         int generatedId = new Random().nextInt();
+        Model modelDouble = mock(Model.class);
+
+        when(aulaService.deleteById(generatedId)).thenReturn(true);
+
+        List<AulaEntity> listAulasDouble = new ArrayList<>();
+
+        when(aulaService.listAll()).thenReturn(listAulasDouble);
         //Act
-        String result = aulaController.deleteAula(generatedId);
+        String result = aulaController.deleteAula(generatedId, modelDouble);
         //Assert
-        verify(aulaService, times(1)).deleteById(generatedId);
-        assertEquals("redirect:/aulas", result);
+        assertEquals("aulas/index", result);
+        verify(modelDouble, times(1)).addAttribute("error4", "Username & Password Incorrectos");
+    }
+
+    @Test
+    void shouldReturnErrorMessageWhenDeleteAulaByIdIsFalse() {
+        //Arrange
+        int generatedId = new Random().nextInt();
+        Model modelDouble = mock(Model.class);
+
+        when(aulaService.deleteById(generatedId)).thenReturn(false);
+        List<AulaEntity> listAulasDouble = new ArrayList<>();
+        when(aulaService.listAll()).thenReturn(listAulasDouble);
+        //Act
+        String result = aulaController.deleteAula(generatedId, modelDouble);
+        //Assert
+        assertEquals("aulas/index", result);
+        verify(modelDouble, times(1)).addAttribute("error", "Username & Password Incorrectos");
     }
 }

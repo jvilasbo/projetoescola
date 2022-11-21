@@ -29,10 +29,19 @@
     <div class="row">
         <h1>Lista de Aulas</h1>
     </div>
+    <br/><br/>
     <div class="row">
         <a class="btn btn-primary" href="/aula/newAula" role="button">Adicionar Aula</a>
     </div>
-    <br/><br/>
+    <br>
+    <div class="row">
+        <p th:if="${error}" class="error" style="color:red">A aula não pode ser apagada!</p>
+    </div>
+    <div class="row">
+        <p th:if="${error4}" class="error4" style="color:lime">Aula apagada com sucesso!</p>
+    </div>
+    <br/>
+
     <div class="row">
         <div class="col-12">
             <table class="table table-hover">

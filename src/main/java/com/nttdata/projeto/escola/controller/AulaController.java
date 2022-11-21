@@ -83,8 +83,18 @@ public class AulaController {
     }
 
     @RequestMapping("/deleteAula/{id}")
-    public String deleteAula(@PathVariable(name = "id") int id) {
-        aulaService.deleteById(id);
-        return "redirect:/aulas";
+    public String deleteAula(@PathVariable(name = "id") int id, Model m) {
+        if(aulaService.deleteById(id)){
+            List<AulaEntity> aulas = aulaService.listAll();
+            m.addAttribute("aulas", aulas);
+            m.addAttribute("error4", "Username & Password Incorrectos");
+            return "aulas/index";
+        }else{
+            m.addAttribute("error", "Username & Password Incorrectos");
+            List<AulaEntity> aulas = aulaService.listAll();
+            m.addAttribute("aulas", aulas);
+            return "aulas/index";
+        }
+
     }
 }

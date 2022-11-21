@@ -28,27 +28,6 @@ public class MinisterioRestRepository {
             .clientConnector(new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.newConnection())))
             .build();
 
-   /* public Optional<List<DisciplinaRestDto>> findAllDisciplinas () {
-        try {
-            Mono<List<DisciplinaRestDto>> response = webClient.get()
-                    .uri("/disciplinas")
-                    .retrieve()
-                    .onStatus(HttpStatus::is4xxClientError, error -> {
-                        return Mono.empty();
-                    })
-                    .bodyToMono(new ParameterizedTypeReference<List<DisciplinaRestDto>>() {
-                    })
-                    .onErrorReturn(null)
-                    .doOnError(throwable -> {
-                        System.out.println(throwable.getMessage());
-                    });
-
-            List<DisciplinaRestDto> lista = response.block();
-            return Optional.of(lista);
-        }catch( Exception e) {
-            return Optional.empty();
-        }
-    }*/
 
     public Optional<List<DisciplinaRestDto>> findAllDisciplinas () {
         List<DisciplinaRestDto> listDisciplinas;

@@ -51,15 +51,6 @@ public class AlunoController {
         return "alunos/new_aluno";
     }
 
-    //save working without validation of escolaridade
- /*   @RequestMapping(value = "/saveAluno", method = RequestMethod.POST)
-    public String saveAluno(@ModelAttribute("aluno") AlunoEntity aluno) {
-
-        alunoService.save(aluno);
-
-        return "redirect:/alunos";
-    }*/
-
     //save with validation
     @RequestMapping(value = "/saveAluno", method = RequestMethod.POST)
     public String saveAluno(@ModelAttribute("aluno") AlunoEntity aluno, Model m) {
